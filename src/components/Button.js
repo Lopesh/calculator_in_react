@@ -3,10 +3,23 @@ import React from 'react';
 export default class Button extends React.Component{
     constructor(){
       super();
-      this.oprationArray = ['/', 'back', 'clear', 'X', '(', ')', '-', 'X^2', 'Sq. Root', '.', '%', '+', '=']
+      this.oprationArray = ['/', 'X', '-', '.', '%', '+', '=']
+      this.otherFunctionalArray = ['X^2', 'Sq. Root', 'back', 'clear', '(', ')']
     }
+
+  
     buttonClick = () => {
-      console.log(this.props)  
+      let textBoxObject = document.getElementById('Display-Box')
+      if( textBoxObject.value === "" ){
+        if(!(this.oprationArray.includes(this.props.name))){
+          textBoxObject.value = this.props.name
+        }
+      } else {
+          if(['1','2','3','4', '5', '6','7','8','9'].includes(this.props.name)){
+            textBoxObject.value += this.props.name  
+          }
+             
+      } 
     }
 
     render(){
