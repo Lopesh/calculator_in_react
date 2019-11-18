@@ -7,18 +7,38 @@ export default class Button extends React.Component{
       this.otherFunctionalArray = ['X^2', 'Sq. Root', 'back', 'clear', '(', ')']
     }
 
-  
     buttonClick = () => {
+      var name = this.props.name
       let textBoxObject = document.getElementById('Display-Box')
-      if( textBoxObject.value === "" ){
-        if(!(this.oprationArray.includes(this.props.name))){
-          textBoxObject.value = this.props.name
+      if( textBoxObject.value === '' ){
+        if(!(this.oprationArray.includes(name))){
+          textBoxObject.value = name
         }
       } else {
-          if(['1','2','3','4', '5', '6','7','8','9'].includes(this.props.name)){
-            textBoxObject.value += this.props.name  
+          if(!(['back', 'clear', '=', '%'].includes(name))){
+            textBoxObject.value += name
           }
-             
+          switch(name) {
+            case 'back':
+              textBoxObject.value = textBoxObject.value.slice(0, -1)
+              break;
+            case 'clear':  
+              textBoxObject.value = ''
+              break;
+            case '%':
+              if(/^\d+$/.test(textBoxObject.value)){
+                var valueForPercentage = textBoxObject.value
+              };
+              textBoxObject.value = valueForPercentage / 100
+              break;
+            case '=':
+              try {            
+                textBoxObject.value = eval(textBoxObject.value.replace('X', '*'))
+              } catch(e) {
+                textBoxObject.value = 'Invalid Equation'
+              } 
+              break;  
+          } 
       } 
     }
 
