@@ -7,15 +7,27 @@ export default class Button extends React.Component{
       this.otherFunctionalArray = ['X^2', 'Sq. Root', 'back', 'clear', '(', ')']
     }
 
+    setTextBoxValue = (obj, val, is_contatenation) => {
+      if(is_contatenation){
+        obj.value += val
+      } else{
+        obj.value = val
+      } 
+    }
+
     buttonClick = () => {
       var name = this.props.name
       let textBoxObject = document.getElementById('Display-Box')
       if( textBoxObject.value === '' ){
         if(!(this.oprationArray.includes(name))){
-          textBoxObject.value = name
+          this.setTextBoxValue(textBoxObject, name, false)
         }
       } else {
+          if(textBoxObject.value === 'Invalid Equation'){
+            this.setTextBoxValue(textBoxObject, '', false)
+          }
           if(!(['back', 'clear', '=', '%'].includes(name))){
+            this.setTextBoxValue(textBoxObject, '', true)
             textBoxObject.value += name
           }
           switch(name) {
@@ -38,7 +50,7 @@ export default class Button extends React.Component{
                 textBoxObject.value = 'Invalid Equation'
               } 
               break;  
-          } 
+            }
       } 
     }
 

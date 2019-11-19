@@ -11,7 +11,7 @@ export default class CalculatorBody extends React.Component{
     createCalculatorButton = () => {
         let allbuttonsArray = []
         for(let i = 0; i < this.buttonsArray.length; i++){
-            allbuttonsArray.push(<CalculatorButton name={this.buttonsArray[i]} />)
+            allbuttonsArray.push(<CalculatorButton name={this.buttonsArray[i]}/>)
         }
         console.log(allbuttonsArray);
         return allbuttonsArray;
